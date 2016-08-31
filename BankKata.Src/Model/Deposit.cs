@@ -2,13 +2,14 @@ namespace BankKata.Src.Model
 {
     public class Deposit : Transaction
     {
-        private readonly decimal _amount;
-        private readonly string _date;
-
         public Deposit(decimal amount, string date)
         {
-            _amount = amount;
-            _date = date;
+            Amount = amount;
+            Date = date;
         }
+
+        public decimal Amount { get; }
+
+        public string Date { get; }
     }
 }

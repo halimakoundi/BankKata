@@ -19,8 +19,8 @@ namespace BanKata.Tests
         [Given(@"A client makes a deposit of (.*) on (.*)")]
         public void GivenAClientMakesADepositOfOn(decimal amount, string date)
         {
-            _printingVisitor = new StatementPrinter();
             _console = Substitute.For<Printer>();
+            _printingVisitor = new StatementPrinter(_console);
             _transactionRepo = new TransactionRepo();
             _account = new BankAccount(_transactionRepo, _printingVisitor);
             _account.Deposit(amount, date);
