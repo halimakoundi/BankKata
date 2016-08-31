@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using BankKata.Src.Model.Presentation;
 
 namespace BankKata.Src.Model
@@ -20,7 +22,8 @@ namespace BankKata.Src.Model
 
         public virtual void Accept(Visitor visitor)
         {
-            foreach (var transaction in _transactions)
+            foreach (var transaction in _transactions
+                                            .OrderByDescending(x => DateTime.Parse(x.Date)))
             {
                 transaction.Accept(visitor);
             }

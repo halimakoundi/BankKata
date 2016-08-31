@@ -31,5 +31,22 @@ namespace BanKata.Tests
 
             _statementPrinter.Received().Visit(deposit);
         }
+
+        [Test]
+        public void print_transactions_in_order()
+        {
+            var deposit = new Deposit(400m, "20/08/2016");
+            _statement.Add(deposit);
+            var withdrawal = new Withdrawal(10m, "31/08/2016");
+            _statement.Add(withdrawal);
+
+            _statement.Accept(_statementPrinter);
+
+            Received.InOrder(() =>
+            {
+                _statementPrinter.Received().Visit(withdrawal);
+                _statementPrinter.Received().Visit(deposit);
+            });
+        }
     }
 }
