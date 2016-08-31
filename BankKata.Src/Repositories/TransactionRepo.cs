@@ -11,7 +11,7 @@ namespace BankKata.Src.Repositories
             _statement.Add(transaction);
         }
 
-        public Statement Statement()
+        public virtual Statement Statement()
         {
             return _statement;
         }

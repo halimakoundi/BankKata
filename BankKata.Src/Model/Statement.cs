@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BankKata.Src.Model.Presentation;
 
 namespace BankKata.Src.Model
 {
@@ -15,6 +16,11 @@ namespace BankKata.Src.Model
         public int Count()
         {
             return _transactions.Count;
+        }
+
+        public virtual void Accept(Visitor visitor)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

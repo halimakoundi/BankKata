@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using BankKata.Src;
-using BankKata.Src.Model;
+﻿using BankKata.Src.Model;
 using BankKata.Src.Repositories;
 using NUnit.Framework;
 

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using BankKata.Src;
+﻿using System.Text.RegularExpressions;
 using BankKata.Src.Clients;
 using BankKata.Src.Model;
+using BankKata.Src.Model.Presentation;
 using BankKata.Src.Repositories;
 using NSubstitute;
 using TechTalk.SpecFlow;
@@ -15,13 +14,15 @@ namespace BanKata.Tests
         private BankAccount _account;
         private TransactionRepo _transactionRepo;
         private Printer _console;
+        private Visitor _printingVisitor;
 
         [Given(@"A client makes a deposit of (.*) on (.*)")]
         public void GivenAClientMakesADepositOfOn(decimal amount, string date)
         {
+            _printingVisitor = new StatementPrinter();
             _console = Substitute.For<Printer>();
             _transactionRepo = new TransactionRepo();
-            _account = new BankAccount(_transactionRepo);
+            _account = new BankAccount(_transactionRepo, _printingVisitor);
             _account.Deposit(amount, date);
         }
 

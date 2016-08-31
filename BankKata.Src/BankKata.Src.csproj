@@ -44,6 +44,8 @@
     <Compile Include="Clients\Printer.cs" />
     <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\Deposit.cs" />
+    <Compile Include="Model\Presentation\StatementPrinter.cs" />
+    <Compile Include="Model\Presentation\Visitor.cs" />
     <Compile Include="Model\Statement.cs" />
     <Compile Include="Model\Transaction.cs" />
     <Compile Include="Model\Withdrawal.cs" />

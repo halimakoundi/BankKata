@@ -1,3 +1,4 @@
+using BankKata.Src.Model.Presentation;
 using BankKata.Src.Repositories;
 
 namespace BankKata.Src.Model
@@ -5,10 +6,12 @@ namespace BankKata.Src.Model
     public class BankAccount
     {
         private readonly TransactionRepo _transactionRepo;
+        private readonly Visitor _printingVisitor;
 
-        public BankAccount(TransactionRepo transactionRepo)
+        public BankAccount(TransactionRepo transactionRepo, Visitor printingVisitor)
         {
             _transactionRepo = transactionRepo;
+            _printingVisitor = printingVisitor;
         }
 
         public void Deposit(decimal amount, string date)
@@ -23,7 +26,7 @@ namespace BankKata.Src.Model
 
         public void PrintStatement()
         {
-            
+            _transactionRepo.Statement().Accept(_printingVisitor);
         }
     }
 }
