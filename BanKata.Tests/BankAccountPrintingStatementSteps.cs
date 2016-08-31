@@ -1,4 +1,6 @@
-﻿using BankKata.Src;
+﻿using System;
+using System.Text.RegularExpressions;
+using BankKata.Src;
 using NSubstitute;
 using TechTalk.SpecFlow;
 
@@ -38,15 +40,16 @@ namespace BanKata.Tests
             _account.PrintStatement();
         }
         
-        [Then(@"the client would see ""(.*)""")]
-        public void ThenTheClientWouldSee(string p0)
+        [Then(@"the client would see (.*)")]
+        public void ThenTheClientWouldSee(string printedStatement)
         {
+            
             Received.InOrder(() =>
             {
-                _console.PrintLine("date || credit || debit || balance");
-                _console.PrintLine("14/01/2012 || || 500.00 || 2500.00");
-                _console.PrintLine("13/01/2012 || 2000.00 || || 3000.00");
-                _console.PrintLine("10/01/2012 || 1000.00 || || 1000.00");
+                foreach (var line in Regex.Split(printedStatement, "\n"))
+                {
+                    _console.PrintLine(line);
+                }
             });
         }
     }

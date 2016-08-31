@@ -1,4 +1,5 @@
-﻿using BankKata.Src;
+﻿using System.Text.RegularExpressions;
+using BankKata.Src;
 using NUnit.Framework;
 
 namespace BanKata.Tests

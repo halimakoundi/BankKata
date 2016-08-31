@@ -2,7 +2,7 @@
 {
     public class BankAccount
     {
-        private TransactionRepo _transactionRepo;
+        private readonly TransactionRepo _transactionRepo;
 
         public BankAccount(TransactionRepo transactionRepo)
         {
