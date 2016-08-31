@@ -19,10 +19,10 @@ namespace BanKata.Tests
         [SetUp]
         public void Setup()
         {
-            _statement = Substitute.For<Statement>();
-            _transactionRepo = Substitute.For<TransactionRepo>();
             _console = Substitute.For<Printer>();
-            _printingVisitor = Substitute.For<StatementPrinter>(_console);
+            _statement = Substitute.For<Statement>(_console);
+            _transactionRepo = Substitute.For<TransactionRepo>(_statement);
+            _printingVisitor = Substitute.For<StatementPrinter>();
             _account = new BankAccount(_transactionRepo, _printingVisitor);
         }
 

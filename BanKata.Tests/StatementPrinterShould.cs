@@ -16,31 +16,21 @@ namespace BanKata.Tests
         public void Setup()
         {
             _console = Substitute.For<Printer>();
-            _statementPrinter = new StatementPrinter(_console);
-        }
-
-        [Test]
-        public void print_header()
-        {
-            _statementPrinter.PrintHeader();
-
-            _console.Received().PrintLine("date || credit || debit || balance");
+            _statementPrinter = new StatementPrinter();
         }
 
         [Test]
         public void print_deposit_transaction()
         {
-            _statementPrinter.Visit(new Deposit(500.00m, "31/08/2016"));
-
-            _console.Received().PrintLine("31/08/2016 || || 500.00 || ");
+            var lineToPrint = _statementPrinter.Visit(new Deposit(500.00m, "31/08/2016"));
+            Assert.That(lineToPrint,Is.EqualTo("31/08/2016 || || 500.00 || "));
         }
 
         [Test]
         public void print_withdrawal_transaction()
         {
-            _statementPrinter.Visit(new Withdrawal(150.00m, "31/08/2016"));
-
-            _console.Received().PrintLine("31/08/2016 || 150.00 || || ");
+           var lineToPrint = _statementPrinter.Visit(new Withdrawal(150.00m, "31/08/2016"));
+            Assert.That(lineToPrint, Is.EqualTo("31/08/2016 || 150.00 || || "));
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using BankKata.Src.Model;
+﻿using BankKata.Src.Clients;
+using BankKata.Src.Model;
 using BankKata.Src.Repositories;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace BanKata.Tests
@@ -9,11 +11,13 @@ namespace BanKata.Tests
     {
         private TransactionRepo _repo;
         private Statement _transactions;
+        private Printer _console;
 
         [SetUp]
         public void Setup()
         {
-            _repo = new TransactionRepo();
+            _console = Substitute.For<Printer>();
+            _repo = new TransactionRepo(new Statement(_console));
         }
 
         [Test]

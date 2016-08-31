@@ -20,8 +20,8 @@ namespace BanKata.Tests
         public void GivenAClientMakesADepositOfOn(decimal amount, string date)
         {
             _console = Substitute.For<Printer>();
-            _printingVisitor = new StatementPrinter(_console);
-            _transactionRepo = new TransactionRepo();
+            _printingVisitor = new StatementPrinter();
+            _transactionRepo = new TransactionRepo(new Statement(_console));
             _account = new BankAccount(_transactionRepo, _printingVisitor);
             _account.Deposit(amount, date);
         }

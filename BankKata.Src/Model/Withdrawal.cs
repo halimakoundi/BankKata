@@ -13,9 +13,9 @@ namespace BankKata.Src.Model
             Amount = amount;
         }
 
-        public void Accept(Visitor visitor)
+        public string Accept(Visitor visitor)
         {
-            visitor.Visit(this);
+            return visitor.Visit(this);
         }
     }
 }

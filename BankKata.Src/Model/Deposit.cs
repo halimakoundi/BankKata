@@ -13,9 +13,9 @@ namespace BankKata.Src.Model
             Date = date;
         }
 
-        public void Accept(Visitor visitor)
+        public string Accept(Visitor visitor)
         {
-            visitor.Visit(this);
+            return visitor.Visit(this);
         }
     }
 }

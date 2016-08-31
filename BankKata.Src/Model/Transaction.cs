@@ -4,7 +4,7 @@ namespace BankKata.Src.Model
 {
     public interface Transaction
     {
-        void Accept(Visitor visitor);
+        string Accept(Visitor visitor);
         string Date { get; }
     }
 }

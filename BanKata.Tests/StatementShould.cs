@@ -16,17 +16,16 @@ namespace BanKata.Tests
         [SetUp]
         public void Setup()
         {
-            _statement = new Statement();
             _console = Substitute.For<Printer>();
-            _statementPrinter = Substitute.For<StatementPrinter>(_console);
+            _statement = new Statement(_console);
+            _statementPrinter = Substitute.For<StatementPrinter>();
         }
 
         [Test]
         public void print_statement_header()
         {
             _statement.Accept(_statementPrinter);
-
-            _statementPrinter.Received(1).PrintHeader();
+            _console.Received().PrintLine("date || credit || debit || balance");
         }
 
         [Test]
@@ -54,6 +53,24 @@ namespace BanKata.Tests
             {
                 _statementPrinter.Received().Visit(withdrawal);
                 _statementPrinter.Received().Visit(deposit);
+            });
+        }
+
+        [Test]
+        public void print_statement_balance()
+        {
+            var deposit = new Deposit(400m, "20/08/2016");
+            _statement.Add(deposit);
+            var withdrawal = new Withdrawal(10m, "31/08/2016");
+            _statement.Add(withdrawal);
+
+            _statement.Accept(_statementPrinter);
+
+            Received.InOrder(() =>
+            {
+                _console.Received().PrintLine("date || credit || debit || balance");
+                _console.Received().PrintLine("31/08/2016 || || 10.00 || 390.00");
+                _console.Received().PrintLine("20/08/2016 || 400.00 || || 400.00");
             });
         }
     }
