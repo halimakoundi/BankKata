@@ -13,7 +13,7 @@ namespace BankKata.Src.Model.Presentation
 
         public void Visit(Withdrawal withdrawal)
         {
-            throw new System.NotImplementedException();
+            _console.PrintLine($"{withdrawal.Date} || {withdrawal.Amount.ToString("00.00")} || || ");
         }
 
         public void Visit(Deposit deposit)

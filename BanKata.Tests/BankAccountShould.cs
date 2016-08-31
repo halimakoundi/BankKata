@@ -1,4 +1,5 @@
-﻿using BankKata.Src.Model;
+﻿using BankKata.Src.Clients;
+using BankKata.Src.Model;
 using BankKata.Src.Model.Presentation;
 using BankKata.Src.Repositories;
 using NSubstitute;
@@ -13,13 +14,15 @@ namespace BanKata.Tests
         private Statement _statement;
         private Visitor _printingVisitor;
         private BankAccount _account;
+        private Printer _console;
 
         [SetUp]
         public void Setup()
         {
             _statement = Substitute.For<Statement>();
             _transactionRepo = Substitute.For<TransactionRepo>();
-            _printingVisitor = Substitute.For<StatementPrinter>();
+            _console = Substitute.For<Printer>();
+            _printingVisitor = Substitute.For<StatementPrinter>(_console);
             _account = new BankAccount(_transactionRepo, _printingVisitor);
         }
 
