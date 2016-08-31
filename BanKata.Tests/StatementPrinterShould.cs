@@ -30,12 +30,9 @@ namespace BanKata.Tests
         [Test]
         public void print_withdrawal_transaction()
         {
-            var console = Substitute.For<Printer>();
-            StatementPrinter statementPrinter = new StatementPrinter(console);
+            _statementPrinter.Visit(new Withdrawal(150.00m, "31/08/2016"));
 
-            statementPrinter.Visit(new Withdrawal(150.00m, "31/08/2016"));
-
-            console.Received().PrintLine("31/08/2016 || 150.00 || || ");
+            _console.Received().PrintLine("31/08/2016 || 150.00 || || ");
         }
     }
 }
