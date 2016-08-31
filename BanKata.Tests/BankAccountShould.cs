@@ -36,7 +36,7 @@ namespace BanKata.Tests
             Received.InOrder(() =>
             {
                 _transactionRepo.Statement();
-                _statement.Accept(_printingVisitor);
+                _statement.PrintWith(_printingVisitor);
             });
         }
     }

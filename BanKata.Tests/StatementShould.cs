@@ -24,7 +24,7 @@ namespace BanKata.Tests
         [Test]
         public void print_statement_header()
         {
-            _statement.Accept(_statementPrinter);
+            _statement.PrintWith(_statementPrinter);
             _console.Received().PrintLine("date || credit || debit || balance");
         }
 
@@ -34,7 +34,7 @@ namespace BanKata.Tests
             var deposit = new Deposit(400m, "20/08/2016");
             _statement.Add(deposit);
 
-            _statement.Accept(_statementPrinter);
+            _statement.PrintWith(_statementPrinter);
 
             _statementPrinter.Received().Visit(deposit);
         }
@@ -47,7 +47,7 @@ namespace BanKata.Tests
             var withdrawal = new Withdrawal(10m, "31/08/2016");
             _statement.Add(withdrawal);
 
-            _statement.Accept(_statementPrinter);
+            _statement.PrintWith(_statementPrinter);
 
             Received.InOrder(() =>
             {
@@ -64,7 +64,7 @@ namespace BanKata.Tests
             var withdrawal = new Withdrawal(10m, "31/08/2016");
             _statement.Add(withdrawal);
 
-            _statement.Accept(_statementPrinter);
+            _statement.PrintWith(_statementPrinter);
 
             Received.InOrder(() =>
             {

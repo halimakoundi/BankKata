@@ -63,11 +63,11 @@ namespace BanKata.Tests
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Print statement", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("PrintWith statement", new string[] {
                 "mytag"}, SourceLine=6)]
         public virtual void PrintStatement()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Print statement", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("PrintWith statement", new string[] {
                         "mytag"});
 #line 7
 this.ScenarioSetup(scenarioInfo);

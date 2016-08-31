@@ -26,7 +26,7 @@ namespace BankKata.Src.Model
 
         public void PrintStatement()
         {
-            _transactionRepo.Statement().Accept(_printingVisitor);
+            _transactionRepo.Statement().PrintWith(_printingVisitor);
         }
     }
 }

@@ -27,11 +27,11 @@ namespace BankKata.Src.Model
             return _transactions.Count;
         }
 
-        public virtual void Accept(Visitor visitor)
+        public virtual void PrintWith(Visitor visitor)
         {
             _printer.PrintLine("date || credit || debit || balance");
-            foreach (var transaction in _transactions
-                                            .OrderByDescending(x => DateTime.Parse(x.Date)))
+            var orderedTransactions = _transactions.OrderByDescending(x => DateTime.Parse(x.Date));
+            foreach (var transaction in orderedTransactions)
             {
                 var transactionLine = transaction.Accept(visitor);
                 _printer.PrintLine("hello this is not printed for some reason :/ " + transactionLine);
