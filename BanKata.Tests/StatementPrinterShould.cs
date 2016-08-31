@@ -20,6 +20,14 @@ namespace BanKata.Tests
         }
 
         [Test]
+        public void print_header()
+        {
+            _statementPrinter.PrintHeader();
+
+            _console.Received().PrintLine("date || credit || debit || balance");
+        }
+
+        [Test]
         public void print_deposit_transaction()
         {
             _statementPrinter.Visit(new Deposit(500.00m, "31/08/2016"));

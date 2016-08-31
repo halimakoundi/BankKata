@@ -22,6 +22,14 @@ namespace BanKata.Tests
         }
 
         [Test]
+        public void print_statement_header()
+        {
+            _statement.Accept(_statementPrinter);
+
+            _statementPrinter.Received(1).PrintHeader();
+        }
+
+        [Test]
         public void print_deposit()
         {
             var deposit = new Deposit(400m, "20/08/2016");
