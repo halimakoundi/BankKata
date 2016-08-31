@@ -15,11 +15,12 @@ namespace BanKata.Tests
         }
 
         [Test]
-        public void doSomething()
+        public void save_deposit()
         {
             _repo.Save(new Deposit(100, "2012/03/12"));
             Statement transactions = _repo.Statement();
-            Assert.That(transactions, Is.Not.Empty);
+            Assert.That(transactions.Count(), Is.Not.Zero);
         }
+
     }
 }

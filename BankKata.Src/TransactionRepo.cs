@@ -2,11 +2,11 @@
 {
     public class TransactionRepo
     {
-        private Statement _statement;
+        private readonly Statement _statement = new Statement();
 
-        public void Save(Transaction deposit)
+        public void Save(Transaction transaction)
         {
-            throw new System.NotImplementedException();
+            _statement.Add(transaction);
         }
 
         public Statement Statement()
