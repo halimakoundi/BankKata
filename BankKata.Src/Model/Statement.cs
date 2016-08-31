@@ -20,7 +20,10 @@ namespace BankKata.Src.Model
 
         public virtual void Accept(Visitor visitor)
         {
-            throw new System.NotImplementedException();
+            foreach (var transaction in _transactions)
+            {
+                transaction.Accept(visitor);
+            }
         }
     }
 }

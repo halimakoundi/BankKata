@@ -1,3 +1,5 @@
+using BankKata.Src.Model.Presentation;
+
 namespace BankKata.Src.Model
 {
     public class Deposit : Transaction
@@ -9,6 +11,11 @@ namespace BankKata.Src.Model
         {
             Amount = amount;
             Date = date;
+        }
+
+        public void Accept(Visitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

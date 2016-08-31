@@ -1,6 +1,9 @@
+using BankKata.Src.Model.Presentation;
+
 namespace BankKata.Src.Model
 {
-    public class Transaction
+    public interface Transaction
     {
+        void Accept(Visitor visitor);
     }
 }
