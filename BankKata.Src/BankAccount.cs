@@ -18,5 +18,10 @@
         {
             _transactionRepo.Save(new Withdrawal(amount, date));
         }
+
+        public void PrintStatement()
+        {
+            
+        }
     }
 }
