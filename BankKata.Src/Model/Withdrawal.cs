@@ -1,4 +1,4 @@
-namespace BankKata.Src
+namespace BankKata.Src.Model
 {
     public class Withdrawal : Transaction
     {

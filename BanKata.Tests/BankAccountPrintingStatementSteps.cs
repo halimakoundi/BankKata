@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using BankKata.Src;
+using BankKata.Src.Clients;
+using BankKata.Src.Model;
+using BankKata.Src.Repositories;
 using NSubstitute;
 using TechTalk.SpecFlow;
 

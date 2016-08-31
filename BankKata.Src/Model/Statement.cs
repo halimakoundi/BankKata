@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BankKata.Src
+namespace BankKata.Src.Model
 {
     public class Statement
     {

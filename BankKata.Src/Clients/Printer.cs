@@ -1,4 +1,4 @@
-﻿namespace BankKata.Src
+﻿namespace BankKata.Src.Clients
 {
     public interface Printer
     {

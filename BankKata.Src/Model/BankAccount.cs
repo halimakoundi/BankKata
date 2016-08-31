@@ -1,4 +1,6 @@
-﻿namespace BankKata.Src
+using BankKata.Src.Repositories;
+
+namespace BankKata.Src.Model
 {
     public class BankAccount
     {

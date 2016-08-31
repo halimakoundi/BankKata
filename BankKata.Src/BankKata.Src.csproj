@@ -41,14 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BankAccount.cs" />
-    <Compile Include="Deposit.cs" />
-    <Compile Include="Printer.cs" />
+    <Compile Include="Clients\Printer.cs" />
+    <Compile Include="Model\BankAccount.cs" />
+    <Compile Include="Model\Deposit.cs" />
+    <Compile Include="Model\Statement.cs" />
+    <Compile Include="Model\Transaction.cs" />
+    <Compile Include="Model\Withdrawal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Statement.cs" />
-    <Compile Include="Transaction.cs" />
-    <Compile Include="TransactionRepo.cs" />
-    <Compile Include="Withdrawal.cs" />
+    <Compile Include="Repositories\TransactionRepo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
