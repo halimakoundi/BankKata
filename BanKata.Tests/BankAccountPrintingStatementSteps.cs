@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 using BankKata.Src.Clients;
 using BankKata.Src.Model;
 using BankKata.Src.Model.Presentation;
@@ -50,7 +51,7 @@ namespace BanKata.Tests
             
             Received.InOrder(() =>
             {
-                foreach (var line in Regex.Split(printedStatement, "\n"))
+                foreach (var line in printedStatement.Split(new[] { "\\n" }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     _console.PrintLine(line);
                 }

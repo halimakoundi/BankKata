@@ -80,8 +80,8 @@ this.ScenarioSetup(scenarioInfo);
 #line 11
  testRunner.When("the client prints the bank statement", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 12
- testRunner.Then("the client would see date || credit || debit || balance\\n14/01/2012 || || 500.00 " +
-                    "|| 2500.00\\n13/01/2012 || 2000.00 || || 3000.00\\n10/01/2012 || 1000.00 || || 100" +
+ testRunner.Then("the client would see date || credit || debit || balance\\n01/14/2012 || || 500.00 " +
+                    "|| 2500.00\\n01/13/2012 || 2000.00 || || 3000.00\\n01/10/2012 || 1000.00 || || 100" +
                     "0.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
