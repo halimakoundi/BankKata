@@ -63,20 +63,20 @@ namespace BanKata.Tests
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("PrintWith statement", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("Print statement", new string[] {
                 "mytag"}, SourceLine=6)]
         public virtual void PrintStatement()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("PrintWith statement", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Print statement", new string[] {
                         "mytag"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.Given("A client makes a deposit of 1000.00 on 10-01-2012", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("A client makes a deposit of 1000.00 on 10/01/2012", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
- testRunner.And("a deposit of 2000.00 on 13-01-2012", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a deposit of 2000.00 on 13/01/2012", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 10
- testRunner.And("a withdrawal of 500.00 on 13-01-2012", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a withdrawal of 500.00 on 14/01/2012", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
  testRunner.When("the client prints the bank statement", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 12

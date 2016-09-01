@@ -23,14 +23,14 @@ namespace BanKata.Tests
         public void print_deposit_transaction()
         {
             var lineToPrint = _statementPrinter.Visit(new Deposit(500.00m, "31/08/2016"));
-            Assert.That(lineToPrint,Is.EqualTo("31/08/2016 || || 500.00 || "));
+            Assert.That(lineToPrint,Is.EqualTo("31/08/2016 || 500.00 || || "));
         }
 
         [Test]
         public void print_withdrawal_transaction()
         {
            var lineToPrint = _statementPrinter.Visit(new Withdrawal(150.00m, "31/08/2016"));
-            Assert.That(lineToPrint, Is.EqualTo("31/08/2016 || 150.00 || || "));
+            Assert.That(lineToPrint, Is.EqualTo("31/08/2016 || || 150.00 || "));
         }
     }
 }

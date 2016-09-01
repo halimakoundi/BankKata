@@ -30,12 +30,17 @@ namespace BankKata.Src.Model
         public virtual void PrintWith(Visitor visitor)
         {
             _printer.PrintLine("date || credit || debit || balance");
-            var orderedTransactions = _transactions.OrderByDescending(x => DateTime.Parse(x.Date));
-            foreach (var transaction in orderedTransactions)
+            var orderedTransactions = _transactions.OrderByDescending(x => DateTime.Parse(x.Date))
+                                                    .ToList();
+            var balance = _transactions.Sum(x => x.Amount);
+
+            orderedTransactions.ForEach(transaction =>
             {
-                var transactionLine = transaction.Accept(visitor);
-                _printer.PrintLine("hello this is not printed for some reason :/ " + transactionLine);
-            }
+                _printer.PrintLine(transaction.Accept(visitor) + balance.ToString("00.00"));
+                balance -= transaction.Amount;
+
+            });
         }
+
     }
 }

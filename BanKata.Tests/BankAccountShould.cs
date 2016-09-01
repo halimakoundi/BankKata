@@ -15,6 +15,8 @@ namespace BanKata.Tests
         private Visitor _printingVisitor;
         private BankAccount _account;
         private Printer _console;
+        private string _date = "21/08/2016";
+        private decimal _amount = 20m;
 
         [SetUp]
         public void Setup()
@@ -26,6 +28,24 @@ namespace BanKata.Tests
             _account = new BankAccount(_transactionRepo, _printingVisitor);
         }
 
+
+        [Test]
+        public void store_deposit()
+        {
+            _account.Deposit(_amount, _date);
+
+            _transactionRepo.Received().Save(new Deposit(_amount, _date));
+        }
+
+
+        [Test]
+        public void store_withdrawal()
+        {
+            _account.Withdrawal(_amount,_date);
+
+            _transactionRepo.Received().Save(new Withdrawal(_amount, _date));
+        }
+
         [Test]
         public void retrieve_statement_and_print_it()
         {
@@ -33,11 +53,9 @@ namespace BanKata.Tests
 
             _account.PrintStatement();
 
-            Received.InOrder(() =>
-            {
-                _transactionRepo.Statement();
-                _statement.PrintWith(_printingVisitor);
-            });
+            _transactionRepo.Received().Statement();
+            _statement.Received().PrintWith(_printingVisitor);
+
         }
     }
 }

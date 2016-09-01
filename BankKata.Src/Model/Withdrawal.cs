@@ -4,13 +4,16 @@ namespace BankKata.Src.Model
 {
     public class Withdrawal : Transaction
     {
-        public decimal Amount { get; }
+        private readonly decimal _amount;
+
+        public decimal Amount => - _amount;
+
         public string Date { get; }
 
         public Withdrawal(decimal amount, string date)
         {
             Date = date;
-            Amount = amount;
+            _amount = amount;
         }
 
         public string Accept(Visitor visitor)

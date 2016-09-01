@@ -6,5 +6,6 @@ namespace BankKata.Src.Model
     {
         string Accept(Visitor visitor);
         string Date { get; }
+       decimal Amount { get;}
     }
 }
