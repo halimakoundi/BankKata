@@ -1,4 +1,5 @@
-﻿using BankKata.Src.Clients;
+﻿using System.Linq;
+using BankKata.Src.Clients;
 using BankKata.Src.Model;
 using BankKata.Src.Model.Presentation;
 using BankKata.Src.Repositories;
@@ -11,7 +12,6 @@ namespace BanKata.Tests
     public class BankAccountShould
     {
         private TransactionRepo _transactionRepo;
-        private Statement _statement;
         private Visitor _printingVisitor;
         private BankAccount _account;
         private Printer _console;
@@ -22,8 +22,7 @@ namespace BanKata.Tests
         public void Setup()
         {
             _console = Substitute.For<Printer>();
-            _statement = Substitute.For<Statement>(_console);
-            _transactionRepo = Substitute.For<TransactionRepo>(_statement);
+            _transactionRepo = Substitute.For<TransactionRepo>(_console);
             _printingVisitor = Substitute.For<StatementPrinter>();
             _account = new BankAccount(_transactionRepo, _printingVisitor);
         }
@@ -47,15 +46,11 @@ namespace BanKata.Tests
         }
 
         [Test]
-        public void retrieve_statement_and_print_it()
+        public void print_statement()
         {
-            _transactionRepo.Statement().Returns(_statement);
-
             _account.PrintStatement();
 
-            _transactionRepo.Received().Statement();
-            _statement.Received().PrintWith(_printingVisitor);
-
+            _transactionRepo.Received().Accept(_printingVisitor);
         }
     }
 }

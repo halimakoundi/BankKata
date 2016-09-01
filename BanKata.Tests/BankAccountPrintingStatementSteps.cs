@@ -21,7 +21,7 @@ namespace BanKata.Tests
         {
             _console = Substitute.For<Printer>();
             _printingVisitor = new StatementPrinter();
-            _transactionRepo = new TransactionRepo(new Statement(_console));
+            _transactionRepo = new TransactionRepo(_console);
             _account = new BankAccount(_transactionRepo, _printingVisitor);
             _account.Deposit(amount, date);
         }

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using BankKata.Src.Model.Presentation;
 using BankKata.Src.Repositories;
 
@@ -27,7 +28,7 @@ namespace BankKata.Src.Model
 
         public void PrintStatement()
         {
-            _transactionRepo.Statement().PrintWith(_printingVisitor);
+            _transactionRepo.Accept(_printingVisitor);
         }
     }
 }
