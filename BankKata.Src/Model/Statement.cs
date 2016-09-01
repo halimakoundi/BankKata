@@ -9,7 +9,7 @@ namespace BankKata.Src.Model
     public class Statement
     {
         private readonly Printer _printer;
-        private readonly List<Transaction> _transactions =
+        public readonly List<Transaction> _transactions =
                         new List<Transaction>();
 
         public Statement(Printer printer)
@@ -17,21 +17,10 @@ namespace BankKata.Src.Model
             _printer = printer;
         }
 
-        public void Add(Transaction transaction)
-        {
-            _transactions.Add(transaction);
-        }
-
-        public int Count()
-        {
-            return _transactions.Count;
-        }
-
         public virtual void PrintWith(Visitor visitor)
         {
             _printer.PrintLine("date || credit || debit || balance");
-            var orderedTransactions = _transactions.OrderByDescending(x => DateTime.Parse(x.Date))
-                                                    .ToList();
+            var orderedTransactions = GetOrderedTransactions();
             var balance = _transactions.Sum(x => x.Amount);
 
             orderedTransactions.ForEach(transaction =>
@@ -42,5 +31,11 @@ namespace BankKata.Src.Model
             });
         }
 
+        public List<Transaction> GetOrderedTransactions()
+        {
+            return _transactions.OrderByDescending(x => DateTime.Parse(x.Date))
+                .ToList();
+        }
+        
     }
 }

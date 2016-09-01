@@ -27,7 +27,8 @@ namespace BanKata.Tests
 
             _transactions = _repo.Statement();
 
-            Assert.That(_transactions.Count(), Is.Not.Zero);
+
+            Assert.That(_repo.Count(), Is.EqualTo(1));
         }
 
         [Test]
@@ -35,9 +36,7 @@ namespace BanKata.Tests
         {
             _repo.Save(new Withdrawal(20, "2012/05/12"));
 
-            _transactions = _repo.Statement();
-
-            Assert.That(_transactions.Count(), Is.EqualTo(1));
+            Assert.That(_repo.Count(), Is.EqualTo(1));
         }
     }
 }
