@@ -66,12 +66,7 @@
       <DependentUpon>BankAccountPrintingStatement.feature</DependentUpon>
     </Compile>
     <Compile Include="BankAccountPrintingStatementSteps.cs" />
-    <Compile Include="BankAccountShould.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StatementPrinterShould.cs" />
-    <Compile Include="StatementShould.cs" />
-    <Compile Include="TransactionRepoShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

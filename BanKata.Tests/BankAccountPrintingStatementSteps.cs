@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Text.RegularExpressions;
-using BankKata.Src.Infrastructure;
+using BankKata.Src;
 using BankKata.Src.Model;
-using BankKata.Src.Model.Presentation;
-using BankKata.Src.Repositories;
 using NSubstitute;
 using TechTalk.SpecFlow;
 
@@ -12,49 +9,50 @@ namespace BanKata.Tests
     [Binding]
     public class BankAccountPrintingStatementSteps
     {
-        private BankAccount _account;
-        private TransactionRepo _transactionRepo;
-        private Printer _console;
-        private IPrintStatement _printingPrintStatement;
+        private BankAccount _bankAccount;
+        private IDateProvider _dateProvider;
+        private IConsole _console;
 
-        [Given(@"A client makes a deposit of (.*) on (.*)")]
-        public void GivenAClientMakesADepositOfOn(decimal amount, string date)
+        [Given(@"A client makes a deposit of (.*) on ""(.*)""")]
+        public void GivenAClientMakesADepositOfOn(Decimal amount, string date)
         {
-            _console = Substitute.For<Printer>();
-            _printingPrintStatement = new StatementPrinter(_console);
-            _transactionRepo = new TransactionRepo();
-            _account = new BankAccount(_transactionRepo, _printingPrintStatement);
-            _account.Deposit(amount, date);
+            _console = Substitute.For<IConsole>();
+            _dateProvider = Substitute.For<IDateProvider>();
+            _dateProvider.TodayAsString().Returns(date);
+            _bankAccount = new BankAccount(_dateProvider);
+
+            _bankAccount.Deposit(amount);
         }
 
-        [Given(@"a deposit of (.*) on (.*)")]
-        public void GivenADepositOfOn(decimal amount, string date)
+        [Given(@"a deposit of (.*) on ""(.*)""")]
+        public void GivenADepositOfOn(Decimal amount, string date)
         {
-            _account.Deposit(amount, date);
+            _dateProvider.TodayAsString().Returns(date);
+            _bankAccount.Deposit(amount);
         }
-
-        [Given(@"a withdrawal of (.*) on (.*)")]
-        public void GivenAWithdrawalOfOn(decimal amount, string date)
+        
+        [Given(@"a withdrawal of (.*) on ""(.*)""")]
+        public void GivenAWithdrawalOfOn(Decimal amount, string date)
         {
-            _account.Withdrawal(amount, date);
+            _dateProvider.TodayAsString().Returns(date);
+            _bankAccount.Withdrawal(amount);
         }
         
         [When(@"the client prints the bank statement")]
         public void WhenTheClientPrintsTheBankStatement()
         {
-            _account.PrintStatement();
+            _bankAccount.PrintStatement();
         }
         
-        [Then(@"the client would see (.*)")]
-        public void ThenTheClientWouldSee(string printedStatement)
+        [Then(@"the client would see")]
+        public void ThenTheClientWouldSee(Table table)
         {
-            
             Received.InOrder(() =>
             {
-                foreach (var line in printedStatement.Split(new[] { "\\n" }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    _console.PrintLine(line);
-                }
+                _console.PrintLine("| date       | credit  | debit  | balance |");
+                _console.PrintLine("| 01/14/2012 |         | 500.00 | 2500.00 |");
+                _console.PrintLine("| 01/13/2012 | 2000.00 |        | 3000.00 |");
+                _console.PrintLine("| 01/10/2012 | 1000.00 |        | 1000.00 |");
             });
         }
     }

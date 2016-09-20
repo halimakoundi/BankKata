@@ -74,17 +74,36 @@ namespace BanKata.Tests
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.Given("A client makes a deposit of 1000.00 on 01/10/2012", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("A client makes a deposit of 1000.00 on \"01/10/2012\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
- testRunner.And("a deposit of 2000.00 on 01/13/2012", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a deposit of 2000.00 on \"01/13/2012\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 10
- testRunner.And("a withdrawal of 500.00 on 01/14/2012", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a withdrawal of 500.00 on \"01/14/2012\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
  testRunner.When("the client prints the bank statement", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "date",
+                        "credit",
+                        "debit",
+                        "balance"});
+            table1.AddRow(new string[] {
+                        "01/14/2012",
+                        "",
+                        "500.00",
+                        "2500.00"});
+            table1.AddRow(new string[] {
+                        "01/13/2012",
+                        "2000.00",
+                        "",
+                        "3000.00"});
+            table1.AddRow(new string[] {
+                        "01/10/2012",
+                        "1000.00",
+                        "",
+                        "1000.00"});
 #line 12
- testRunner.Then("the client would see date || credit || debit || balance\\n01/14/2012 || || 500.00 " +
-                    "|| 2500.00\\n01/13/2012 || 2000.00 || || 3000.00\\n01/10/2012 || 1000.00 || || 100" +
-                    "0.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the client would see", ((string)(null)), table1, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

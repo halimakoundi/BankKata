@@ -1,34 +1,27 @@
-using System;
-using System.Linq;
-using BankKata.Src.Model.Presentation;
-using BankKata.Src.Repositories;
-
-namespace BankKata.Src.Model
+﻿namespace BankKata.Src.Model
 {
     public class BankAccount
     {
-        private readonly TransactionRepo _transactionRepo;
-        private readonly IPrintStatement _printingPrintStatement;
+        private IDateProvider _dateProvider;
 
-        public BankAccount(TransactionRepo transactionRepo, IPrintStatement printingPrintStatement)
+        public BankAccount(IDateProvider dateProvider)
         {
-            _transactionRepo = transactionRepo;
-            _printingPrintStatement = printingPrintStatement;
+            this._dateProvider = dateProvider;
         }
 
-        public void Deposit(decimal amount, string date)
+        public void Deposit(decimal p0)
         {
-            _transactionRepo.Save(new Deposit(amount, date));
+            throw new System.NotImplementedException();
         }
 
-        public void Withdrawal(decimal amount, string date)
+        public void Withdrawal(decimal amount)
         {
-            _transactionRepo.Save(new Withdrawal(amount, date));
+            throw new System.NotImplementedException();
         }
 
         public void PrintStatement()
         {
-            _transactionRepo.PrintStatementWith(_printingPrintStatement);
+            throw new System.NotImplementedException();
         }
     }
 }
