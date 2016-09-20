@@ -1,17 +1,20 @@
 ﻿namespace BankKata.Src.Model
 {
-    public class BankAccount
+    public partial class BankAccount
     {
         private IDateProvider _dateProvider;
+        private readonly TransactionRepository _transactionRepo;
 
-        public BankAccount(IDateProvider dateProvider)
+        public BankAccount(IDateProvider dateProvider, TransactionRepository transactionRepo)
         {
             this._dateProvider = dateProvider;
+            _transactionRepo = transactionRepo;
         }
 
-        public void Deposit(decimal p0)
+        public void Deposit(decimal amount)
         {
-            throw new System.NotImplementedException();
+            var transaction = new Transaction(amount, _dateProvider.TodayAsString());
+            _transactionRepo.Save(transaction);
         }
 
         public void Withdrawal(decimal amount)

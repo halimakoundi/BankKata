@@ -12,14 +12,16 @@ namespace BanKata.Tests
         private BankAccount _bankAccount;
         private IDateProvider _dateProvider;
         private IConsole _console;
+        private TransactionRepository _transactionRepo;
 
         [Given(@"A client makes a deposit of (.*) on ""(.*)""")]
         public void GivenAClientMakesADepositOfOn(Decimal amount, string date)
         {
             _console = Substitute.For<IConsole>();
+            _transactionRepo = Substitute.For<TransactionRepository>();
             _dateProvider = Substitute.For<IDateProvider>();
             _dateProvider.TodayAsString().Returns(date);
-            _bankAccount = new BankAccount(_dateProvider);
+            _bankAccount = new BankAccount(_dateProvider, _transactionRepo);
 
             _bankAccount.Deposit(amount);
         }
