@@ -4,11 +4,15 @@
     {
         private IDateProvider _dateProvider;
         private readonly TransactionRepository _transactionRepo;
+        private readonly StatementPrinter _statementPrinter;
 
-        public BankAccount(IDateProvider dateProvider, TransactionRepository transactionRepo)
+        public BankAccount(IDateProvider dateProvider,
+                            TransactionRepository transactionRepo,
+                            StatementPrinter statementPrinter)
         {
-            this._dateProvider = dateProvider;
+            _dateProvider = dateProvider;
             _transactionRepo = transactionRepo;
+            _statementPrinter = statementPrinter;
         }
 
         public void Deposit(decimal amount)
@@ -19,12 +23,14 @@
 
         public void Withdrawal(decimal amount)
         {
-            throw new System.NotImplementedException();
+
+            var transaction = new Transaction(-amount, _dateProvider.TodayAsString());
+            _transactionRepo.Save(transaction);
         }
 
         public void PrintStatement()
         {
-            throw new System.NotImplementedException();
+            _statementPrinter.Print(_transactionRepo.AllTransactions());
         }
     }
 }

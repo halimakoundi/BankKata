@@ -6,5 +6,10 @@
         {
             throw new System.NotImplementedException();
         }
+
+        public virtual Statement AllTransactions()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace BanKata.Tests
         private IDateProvider _dateProvider;
         private IConsole _console;
         private TransactionRepository _transactionRepo;
+        private StatementPrinter _statementPrinter;
 
         [Given(@"A client makes a deposit of (.*) on ""(.*)""")]
         public void GivenAClientMakesADepositOfOn(Decimal amount, string date)
@@ -21,7 +22,8 @@ namespace BanKata.Tests
             _transactionRepo = Substitute.For<TransactionRepository>();
             _dateProvider = Substitute.For<IDateProvider>();
             _dateProvider.TodayAsString().Returns(date);
-            _bankAccount = new BankAccount(_dateProvider, _transactionRepo);
+            _statementPrinter = Substitute.For<StatementPrinter>();
+            _bankAccount = new BankAccount(_dateProvider, _transactionRepo, _statementPrinter);
 
             _bankAccount.Deposit(amount);
         }

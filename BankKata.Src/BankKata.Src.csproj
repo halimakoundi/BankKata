@@ -45,6 +45,8 @@
     <Compile Include="IDateProvider.cs" />
     <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Statement.cs" />
+    <Compile Include="StatementPrinter.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="TransactionRepository.cs" />
   </ItemGroup>
