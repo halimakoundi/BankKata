@@ -10,4 +10,9 @@ Scenario: Print statement
 	And a withdrawal of 500.00 on 01/14/2012
 	When the client prints the bank statement
 	Then the client would see date || credit || debit || balance\n01/14/2012 || || 500.00 || 2500.00\n01/13/2012 || 2000.00 || || 3000.00\n01/10/2012 || 1000.00 || || 1000.00
-	 
+	#Then the client would see 
+	#	| date       | credit  | debit  | balance |
+	#	| 01/14/2012 |         | 500.00 | 2500.00 |
+	#	| 01/13/2012 | 2000.00 |        | 3000.00 |
+	#	| 01/10/2012 | 1000.00 |        | 1000.00 |
+	# 

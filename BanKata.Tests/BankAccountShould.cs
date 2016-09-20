@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using BankKata.Src.Clients;
+using BankKata.Src.Infrastructure;
 using BankKata.Src.Model;
 using BankKata.Src.Model.Presentation;
 using BankKata.Src.Repositories;
@@ -12,7 +12,7 @@ namespace BanKata.Tests
     public class BankAccountShould
     {
         private TransactionRepo _transactionRepo;
-        private Visitor _printingVisitor;
+        private IPrintStatement _printingPrintStatement;
         private BankAccount _account;
         private Printer _console;
         private string _date = "21/08/2016";
@@ -22,9 +22,9 @@ namespace BanKata.Tests
         public void Setup()
         {
             _console = Substitute.For<Printer>();
-            _transactionRepo = Substitute.For<TransactionRepo>(_console);
-            _printingVisitor = Substitute.For<StatementPrinter>();
-            _account = new BankAccount(_transactionRepo, _printingVisitor);
+            _transactionRepo = Substitute.For<TransactionRepo>();
+            _printingPrintStatement = Substitute.For<IPrintStatement>();
+            _account = new BankAccount(_transactionRepo, _printingPrintStatement);
         }
 
 
@@ -50,7 +50,7 @@ namespace BanKata.Tests
         {
             _account.PrintStatement();
 
-            _transactionRepo.Received().Accept(_printingVisitor);
+            _transactionRepo.Received().PrintStatementWith(_printingPrintStatement);
         }
     }
 }

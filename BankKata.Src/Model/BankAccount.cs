@@ -8,12 +8,12 @@ namespace BankKata.Src.Model
     public class BankAccount
     {
         private readonly TransactionRepo _transactionRepo;
-        private readonly Visitor _printingVisitor;
+        private readonly IPrintStatement _printingPrintStatement;
 
-        public BankAccount(TransactionRepo transactionRepo, Visitor printingVisitor)
+        public BankAccount(TransactionRepo transactionRepo, IPrintStatement printingPrintStatement)
         {
             _transactionRepo = transactionRepo;
-            _printingVisitor = printingVisitor;
+            _printingPrintStatement = printingPrintStatement;
         }
 
         public void Deposit(decimal amount, string date)
@@ -28,7 +28,7 @@ namespace BankKata.Src.Model
 
         public void PrintStatement()
         {
-            _transactionRepo.Accept(_printingVisitor);
+            _transactionRepo.PrintStatementWith(_printingPrintStatement);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BankKata.Src.Clients;
 using BankKata.Src.Model;
 using BankKata.Src.Model.Presentation;
 
@@ -10,12 +9,6 @@ namespace BankKata.Src.Repositories
     public class TransactionRepo
     {
         private readonly List<Transaction> _transactions = new List<Transaction>();
-        private readonly Printer _printer;
-
-        public TransactionRepo(Printer printer)
-        {
-            _printer = printer;
-        }
 
         public void Save(Transaction transaction)
         {
@@ -33,18 +26,50 @@ namespace BankKata.Src.Repositories
             return _transactions.Count;
         }
 
-        public void Accept(Visitor visitor)
+        public void PrintStatementWith(IPrintStatement statementLinePrinter)
         {
-            _printer.PrintLine("date || credit || debit || balance");
-            var orderedTransactions = GetOrderedTransactions();
-            var balance = _transactions.Sum(x => x.Amount);
+            statementLinePrinter.PrintHeader();
 
-            orderedTransactions.ForEach(transaction =>
-            {
-                _printer.PrintLine(transaction.Accept(visitor) + balance.ToString("00.00"));
-                balance -= transaction.Amount;
+            PrintStatementLines(statementLinePrinter);
+        }
 
-            });
+        private void PrintStatementLines(IPrintStatement statementLinePrinter)
+        {
+            ToStatementLines()
+                .OrderByDescending(sl => DateTime.Parse(sl.Transaction.Date))
+                .ToList()
+                .ForEach(sl => sl.Accept(statementLinePrinter));
+        }
+
+        private IEnumerable<StatementLine> ToStatementLines()
+        {
+            var bal = 0m;
+            var statementLines = _transactions
+                .Select(t =>
+                {
+                    bal += t.Amount;
+                    var statementLine = new StatementLine(t, bal);
+                    return statementLine;
+                });
+            return statementLines;
+        }
+    }
+
+    public class StatementLine
+    {
+        public StatementLine(Transaction transaction, decimal balance)
+        {
+            Transaction = transaction;
+            Balance = balance;
+        }
+
+        public Transaction Transaction { get; }
+
+        public decimal Balance { get; }
+
+        public void Accept(IPrintStatement printStatement)
+        {
+            printStatement.Print(this);
         }
     }
 }

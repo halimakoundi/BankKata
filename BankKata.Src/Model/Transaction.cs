@@ -4,7 +4,7 @@ namespace BankKata.Src.Model
 {
     public interface Transaction
     {
-        string Accept(Visitor visitor);
+        string PrintWith(IPrintStatement printStatement);
         string Date { get; }
        decimal Amount { get;}
     }

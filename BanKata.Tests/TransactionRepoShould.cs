@@ -1,4 +1,4 @@
-﻿using BankKata.Src.Clients;
+﻿using BankKata.Src.Infrastructure;
 using BankKata.Src.Model;
 using BankKata.Src.Model.Presentation;
 using BankKata.Src.Repositories;
@@ -12,14 +12,14 @@ namespace BanKata.Tests
     {
         private TransactionRepo _repo;
         private Printer _console;
-        private Visitor _statementPrinter;
+        private IPrintStatement _statementPrinter;
 
         [SetUp]
         public void Setup()
         {
             _console = Substitute.For<Printer>();
-            _statementPrinter = Substitute.For<StatementPrinter>();
-            _repo = new TransactionRepo(_console);
+            _statementPrinter = Substitute.For<StatementPrinter>(_console);
+            _repo = new TransactionRepo();
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace BanKata.Tests
         [Test]
         public void print_repo_header()
         {
-            _repo.Accept(_statementPrinter);
+            _repo.PrintStatementWith(_statementPrinter);
             _console.Received().PrintLine("date || credit || debit || balance");
         }
 
@@ -51,9 +51,9 @@ namespace BanKata.Tests
             var deposit = new Deposit(400m, "20/08/2016");
             _repo.Save(deposit);
 
-            _repo.Accept(_statementPrinter);
+            _repo.PrintStatementWith(_statementPrinter);
 
-            _statementPrinter.Received().Visit(deposit);
+            _statementPrinter.Received().Print(deposit);
         }
 
         [Test]
@@ -64,12 +64,12 @@ namespace BanKata.Tests
             var withdrawal = new Withdrawal(10m, "31/08/2016");
             _repo.Save(withdrawal);
 
-            _repo.Accept(_statementPrinter);
+            _repo.PrintStatementWith(_statementPrinter);
 
             Received.InOrder(() =>
             {
-                _statementPrinter.Received().Visit(withdrawal);
-                _statementPrinter.Received().Visit(deposit);
+                _statementPrinter.Received().Print(withdrawal);
+                _statementPrinter.Received().Print(deposit);
             });
         }
 
@@ -81,13 +81,13 @@ namespace BanKata.Tests
             var withdrawal = new Withdrawal(10m, "31/08/2016");
             _repo.Save(withdrawal);
 
-            _repo.Accept(_statementPrinter);
+            _repo.PrintStatementWith(_statementPrinter);
 
             Received.InOrder(() =>
             {
-                _console.Received().PrintLine("date || credit || debit || balance");
-                _console.Received().PrintLine("31/08/2016 || || 10.00 || 390.00");
-                _console.Received().PrintLine("20/08/2016 || 400.00 || || 400.00");
+                _statementPrinter.PrintHeader();
+                _statementPrinter.Print(withdrawal);
+                _statementPrinter.Print(deposit);
             });
         }
 

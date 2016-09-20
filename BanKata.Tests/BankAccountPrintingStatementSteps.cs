@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using BankKata.Src.Clients;
+using BankKata.Src.Infrastructure;
 using BankKata.Src.Model;
 using BankKata.Src.Model.Presentation;
 using BankKata.Src.Repositories;
@@ -15,15 +15,15 @@ namespace BanKata.Tests
         private BankAccount _account;
         private TransactionRepo _transactionRepo;
         private Printer _console;
-        private Visitor _printingVisitor;
+        private IPrintStatement _printingPrintStatement;
 
         [Given(@"A client makes a deposit of (.*) on (.*)")]
         public void GivenAClientMakesADepositOfOn(decimal amount, string date)
         {
             _console = Substitute.For<Printer>();
-            _printingVisitor = new StatementPrinter();
-            _transactionRepo = new TransactionRepo(_console);
-            _account = new BankAccount(_transactionRepo, _printingVisitor);
+            _printingPrintStatement = new StatementPrinter(_console);
+            _transactionRepo = new TransactionRepo();
+            _account = new BankAccount(_transactionRepo, _printingPrintStatement);
             _account.Deposit(amount, date);
         }
 
