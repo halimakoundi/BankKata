@@ -57,9 +57,9 @@ namespace BanKata.Tests
             Received.InOrder(() =>
             {
                 _console.PrintLine("| date       | credit  | debit  | balance |");
-                _console.PrintLine("| 01/14/2012 |         | 500.00 | 2500.00 |");
-                _console.PrintLine("| 01/13/2012 | 2000.00 |        | 3000.00 |");
-                _console.PrintLine("| 01/10/2012 | 1000.00 |        | 1000.00 |");
+                _console.PrintLine("| 01/14/2012 | | 500.00 | 2500.00 |");
+                _console.PrintLine("| 01/13/2012 | 2000.00 | | 3000.00 |");
+                _console.PrintLine("| 01/10/2012 | 1000.00 | | 1000.00 |");
             });
         }
     }
