@@ -31,5 +31,15 @@ namespace BankKata.Src
                 return (_amount.GetHashCode()*397) ^ (_date != null ? _date.GetHashCode() : 0);
             }
         }
+
+        public string Date()
+        {
+            return _date;
+        }
+
+        public decimal Amount()
+        {
+            return _amount;
+        }
     }
 }

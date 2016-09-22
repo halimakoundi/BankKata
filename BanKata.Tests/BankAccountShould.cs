@@ -12,13 +12,15 @@ namespace BanKata.Tests
         private IDateProvider _dateProvider;
         private BankAccount _bankAccount;
         private StatementPrinter _statementPrinter;
+        private IConsole _console;
 
         [SetUp]
         public void SetUp()
         {
             _dateProvider = Substitute.For<IDateProvider>();
             _transactionRepo = Substitute.For<TransactionRepository>();
-            _statementPrinter = Substitute.For<StatementPrinter>();
+            _console = Substitute.For<IConsole>();
+            _statementPrinter = Substitute.For<StatementPrinter>(_console);
             _bankAccount = new BankAccount(_dateProvider, _transactionRepo, _statementPrinter);
         }
 

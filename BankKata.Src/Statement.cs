@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BankKata.Src
 {
@@ -14,6 +15,13 @@ namespace BankKata.Src
         public int Count()
         {
             return _transactions.Count;
+        }
+
+        public IEnumerable<TransactionLine>  TransactionLines()
+        {
+            var runningBalance = 0m;
+
+            return _transactions.Select(x => new TransactionLine(x.Date(), x.Amount(), runningBalance += x.Amount()));
         }
     }
 }
