@@ -19,10 +19,11 @@ namespace BanKata.Tests
         public void GivenAClientMakesADepositOfOn(Decimal amount, string date)
         {
             _console = Substitute.For<IConsole>();
-            _transactionRepo = Substitute.For<TransactionRepository>();
             _dateProvider = Substitute.For<IDateProvider>();
+            _transactionRepo = new TransactionRepository();
+            _statementPrinter = new StatementPrinter();
+
             _dateProvider.TodayAsString().Returns(date);
-            _statementPrinter = Substitute.For<StatementPrinter>();
             _bankAccount = new BankAccount(_dateProvider, _transactionRepo, _statementPrinter);
 
             _bankAccount.Deposit(amount);
@@ -32,6 +33,7 @@ namespace BanKata.Tests
         public void GivenADepositOfOn(Decimal amount, string date)
         {
             _dateProvider.TodayAsString().Returns(date);
+
             _bankAccount.Deposit(amount);
         }
         
@@ -39,6 +41,7 @@ namespace BanKata.Tests
         public void GivenAWithdrawalOfOn(Decimal amount, string date)
         {
             _dateProvider.TodayAsString().Returns(date);
+
             _bankAccount.Withdrawal(amount);
         }
         

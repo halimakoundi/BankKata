@@ -1,10 +1,19 @@
+using System.Collections.Generic;
+
 namespace BankKata.Src
 {
     public class Statement
     {
+        private readonly List<Transaction> _transactions = new List<Transaction>();
+
         public void Add(Transaction transaction)
         {
-            throw new System.NotImplementedException();
+            _transactions.Add(transaction);
+        }
+
+        public int Count()
+        {
+            return _transactions.Count;
         }
     }
 }

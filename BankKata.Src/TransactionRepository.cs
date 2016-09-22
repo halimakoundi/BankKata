@@ -2,14 +2,16 @@
 {
     public class TransactionRepository
     {
+        private Statement _statement = new Statement();
+
         public virtual void Save(Transaction transaction)
         {
-            throw new System.NotImplementedException();
+            _statement.Add(transaction);
         }
 
         public virtual Statement AllTransactions()
         {
-            throw new System.NotImplementedException();
+            return _statement;
         }
     }
 }
