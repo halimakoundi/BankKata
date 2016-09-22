@@ -48,6 +48,7 @@
     <Compile Include="Statement.cs" />
     <Compile Include="StatementPrinter.cs" />
     <Compile Include="Transaction.cs" />
+    <Compile Include="TransactionLine.cs" />
     <Compile Include="TransactionRepository.cs" />
   </ItemGroup>
   <ItemGroup>
