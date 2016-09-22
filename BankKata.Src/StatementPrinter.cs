@@ -2,9 +2,16 @@
 {
     public class StatementPrinter
     {
+        private readonly IConsole _console;
+
+        public StatementPrinter(IConsole console)
+        {
+            _console = console;
+        }
+
         public virtual void Print(Statement statement)
         {
-            throw new System.NotImplementedException();
+            _console.PrintLine("| date       | credit  | debit  | balance |");
         }
     }
 }

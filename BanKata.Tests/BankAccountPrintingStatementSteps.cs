@@ -21,7 +21,7 @@ namespace BanKata.Tests
             _console = Substitute.For<IConsole>();
             _dateProvider = Substitute.For<IDateProvider>();
             _transactionRepo = new TransactionRepository();
-            _statementPrinter = new StatementPrinter();
+            _statementPrinter = new StatementPrinter(_console);
 
             _dateProvider.TodayAsString().Returns(date);
             _bankAccount = new BankAccount(_dateProvider, _transactionRepo, _statementPrinter);
